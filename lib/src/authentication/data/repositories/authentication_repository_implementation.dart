@@ -7,18 +7,16 @@ import 'package:tdd_tutorial/src/authentication/domain/entities/user.dart';
 import 'package:tdd_tutorial/src/authentication/domain/repositories/authentication_repository.dart';
 
 class AuthenticationRepositoryImplementation
-  implements AuthenticationRepository {
-
+    implements AuthenticationRepository {
   const AuthenticationRepositoryImplementation(this._remoteDataSource);
 
   final AuthenticationRemoteDataSource _remoteDataSource;
 
   @override
-  ResultVoid createUser({
-    required String createdAt,
-    required String name,
-    required String avatar
-  }) async {
+  ResultVoid createUser(
+      {required String createdAt,
+      required String name,
+      required String avatar}) async {
     // Test-Driven Development
     // call the remote data source
     // check if the method returns the proper data
@@ -26,10 +24,10 @@ class AuthenticationRepositoryImplementation
     // // check if when the remoteDataSource throws an exception, we return a
     // failure
     try {
-      await _remoteDataSource.createUser(createdAt: createdAt, name: name,
-          avatar: avatar);
+      await _remoteDataSource.createUser(
+          createdAt: createdAt, name: name, avatar: avatar);
       return const Right(null);
-    } on APIException catch(e) {
+    } on APIException catch (e) {
       return Left(APIFailure.fromException(e));
     }
   }
